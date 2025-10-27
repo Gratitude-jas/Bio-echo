@@ -1,0 +1,38 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BioEcho Voice Diagnostic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🧠 BioEcho Voice Diagnostic</h1>
+
+  <section>
+    <h2>🎙️ Record Voice</h2>
+    <button id="recordBtn" type="button">Start Recording</button>
+    <button id="stopBtn" type="button" disabled>Stop & Upload</button>
+  </section>
+
+  <section>
+    <h2>📁 Upload .wav File</h2>
+    <div>
+      <input type="file" id="fileInput" accept=".wav">
+      <button id="uploadBtn" type="button">Upload File</button>
+    </div>
+    <div id="status"></div>
+    <div id="result"></div>
+  </section>
+
+  <section>
+    <h2>📈 Analytics Charts</h2>
+    <img src="http://127.0.0.1:8000/charts/prediction_counts" alt="Prediction Counts">
+    <img src="http://127.0.0.1:8000/charts/confidence_distribution" alt="Confidence Distribution">
+    <img src="http://127.0.0.1:8000/charts/jitter_vs_shimmer" alt="Jitter vs Shimmer">
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- ...existing code... -->

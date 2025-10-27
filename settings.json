@@ -1,0 +1,8 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/data/raw/*.wav",
+    "**/data/raw/**",
+    "**/*.wav"
+  ],
+  "liveServer.settings.wait": 99999
+}
