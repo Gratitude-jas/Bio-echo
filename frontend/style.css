@@ -1,48 +1,308 @@
+/* =============================
+   BioEcho Top-Notch Neuromedical UI
+============================= */
+
+/* Base and Background */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f6f8;
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
-  color: #2c3e50;
+  background: radial-gradient(ellipse 85% 60% at 50% 30%, #e9fbfc 60%, #dbeafe 100%);
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  color: #102a43;
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
 }
 
-h1, h2 {
-  color: #34495e;
+/* Header/Hero Section */
+header.hero {
+  background: linear-gradient(105deg, #42c7ea 0%, #b5ffe5 65%, #ebf9fc 100%);
+  min-height: 270px;
+  border-bottom: 1px solid #a8e9f3;
+  box-shadow: 0 4px 24px #dbeafe40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-button {
-  padding: 0.6rem 1.2rem;
-  margin: 0.5rem;
-  font-size: 1rem;
+.hero-content {
+  text-align: center;
+  padding: 36px 24px 20px 24px;
+}
+.hero-content h1 {
+  font-size: 2.28em;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #0e86b6;
+  margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.hero-content h1::before {
+  content: "";
+  font-size: 1.3em;
+  opacity: 0.78;
+}
+.hero-content .tagline {
+  font-size: 1.17em;
+  color: #11738a;
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+.cta-button, .back-button, .container button[type="submit"] {
+  background: linear-gradient(93deg, #0eeaff 0%, #0ec1ad 100%);
+  color: #fff;
+  border-radius: 28px;
   border: none;
-  border-radius: 5px;
-  background-color: #3498db;
-  color: white;
-  cursor: pointer;
+  font-size: 1.09em;
+  font-weight: 700;
+  padding: 12px 34px;
+  margin-top: 12px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px #0eeaff26;
+  transition: background 0.15s, transform 0.13s, box-shadow 0.15s;
+}
+.cta-button.secondary {
+  background: #fff;
+  color: #0ec1ad;
+  border: 1.8px solid #0eeaff;
+}
+.cta-button:hover, .back-button:hover, .container button[type="submit"]:hover {
+  background: linear-gradient(93deg, #0ec1ad 0%, #0eeaff 100%);
+  color: #fff;
+  box-shadow: 0 13px 32px #0eeaff38;
+  transform: scale(1.036);
 }
 
-button:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
+/* Major Feature Sections */
+.features,
+.grid {
+  max-width: 940px;
+  margin: 38px auto 30px auto;
+  background: #e7fcf9;
+  border-radius: 17px;
+  border-left: 5px solid #51c6de;
+  padding: 19px 18px;
+  box-shadow: 0 2px 13px #b5ffe533;
+}
+.features h2,
+.grid h2 {
+  color: #13a4b3;
+  font-weight: 700;
+  margin-bottom: 13px;
+  font-size: 1.24em;
+}
+.features ul {
+  list-style: none;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.features li {
+  margin-bottom: 12px;
+  font-size: 1.07em;
+  padding-left: 18px;
+  position: relative;
+  color: #16546c;
+}
+.features li:before {
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: linear-gradient(135deg, #0eeaff 60%, #51c6de 100%);
+  border-radius: 50%;
+  margin-right: 12px;
+  vertical-align: middle;
+  position: absolute;
+  left: 0; top: 8px;
 }
 
+/* Card Layouts & Biomarker Radar */
+.card,
+.grid-container .card,
+.container {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 3px 18px rgba(32, 188, 191, .11);
+  padding: 25px 21px 19px 21px;
+  margin-bottom: 22px;
+  border: none;
+  transition: box-shadow 0.17s;
+  position: relative;
+}
+.card:hover, .grid-container .card:hover {
+  box-shadow: 0 10px 33px #0ec1add1, 0 2px 10px #0eeaff30;
+}
+
+/* Visual "Neural" Accent for Cards */
+.card::after, .grid-container .card::after {
+  content: '';
+  position: absolute;
+  left: 18px; bottom: 9px;
+  width: 28px; height: 8px;
+  background: linear-gradient(90deg,#b5ffe5 10%,#0eeaff 90%);
+  border-radius: 7px;
+  opacity: 0.23;
+}
+
+/* Step/Feature Cards */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(187px, 1fr));
+  gap: 19px;
+}
+.grid-container .card span {
+  display: block;
+  color: #35aac7;
+  margin-top: 4px;
+  font-size: 1em;
+  opacity: 0.85;
+}
+
+/* Output Page (Results) */
+body.output-page {
+  background: radial-gradient(ellipse 85% 60% at 50% 30%, #e7fbfa 65%, #e4e6fb 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.output-page .card {
+  max-width: 420px;
+  margin: auto;
+  padding: 39px 29px 25px 29px;
+  background: #fff;
+  border-radius: 17px;
+  box-shadow: 0 5px 28px #0eeaff29;
+  text-align: left;
+  border: none;
+  transition: box-shadow 0.15s;
+}
+.output-page .card:hover {
+  box-shadow: 0 18px 38px #0ec1ad22;
+}
+
+.output-page h1 {
+  text-align: center;
+  color: #0ec1ad;
+  font-size: 1.45em;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: .6px;
+}
+
+#results {
+  margin-bottom: 27px;
+  font-size: 1.08em;
+  background: none;
+  border-radius: 0;
+  color: #1a475c;
+  box-shadow: none;
+  padding: 0;
+}
+
+#results strong {
+  color: #13a4b3;
+  font-weight: 600;
+}
+#results ul {
+  margin: 13px 0 0 0;
+  padding-left: 17px;
+}
+
+#results li {
+  font-size: 1em;
+  color: #1a475c;
+  margin-bottom: 4px;
+  padding-left: 0;
+  border-left: 3px solid #b5ffe5;
+  margin-left: 2px;
+  transition: color 0.16s, border-color 0.16s;
+}
+#results li:hover {
+  color: #0ec1ad;
+  border-left-color: #13a4b3;
+}
+
+/* Upload Form & Button */
+form#uploadForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 input[type="file"] {
-  margin: 0.5rem 0;
+  background: #f0f8fb;
+  border-radius: 8px;
+  padding: 9px 16px;
+  margin-bottom: 16px;
+  width: 96%;
+  color: #196087;
+  border: 1.5px solid #b5e6e9;
+  font-size: 1em;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+input[type="file"]:focus {
+  border-color: #0eeaff;
+}
+button[type="submit"] {
+  padding: 12px 34px;
+  background: linear-gradient(90deg, #0eeaff, #13a4b3);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 26px;
+  font-size: 1.09em;
+  box-shadow: 0 2px 9px #0eeaff24;
+  cursor: pointer;
+  transition: background 0.13s, box-shadow .12s, transform 0.12s;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+button[type="submit"]:hover {
+  background: linear-gradient(93deg, #0ec1ad, #0eeaff);
+  box-shadow: 0 6px 23px #0eeaff52;
+  transform: scale(1.027);
+}
+#status {
+  margin-top: 18px;
+  min-height: 18px;
+  font-size: 1.07em;
+  color: #13a4b3;
 }
 
-section {
-  margin-bottom: 2rem;
+/* Footer */
+footer {
+  text-align: center;
+  background: #e7fcf9;
+  color: #1b898c;
+  font-size: 1em;
+  border-top: 1px solid #b5e6e9;
+  padding: 22px 0 7px 0;
 }
 
-#result {
-  margin-top: 1rem;
-  font-size: 1.1rem;
+/* Accent Icons */
+.fa-microphone, .fa-search {
+  color: #0ec1ad;
+  margin-right: 10px;
+}
+.fa-microphone {
+  font-size: 1.07em;
+  vertical-align: -1px;
+}
+.fa-search {
+  font-size: 0.96em;
 }
 
-img {
-  max-width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 1rem;
+/* Accessibility and focus */
+a, button, input[type="file"] {
+  outline-color: #0eeaff !important;
+  outline-width: 2px;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .container, .features, .grid, .output-page .card {padding: 13px 4vw;}
+  .hero-content {padding: 14px 2vw;}
 }

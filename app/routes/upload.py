@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 import os
+from fastapi.responses import JSONResponse
 import csv
 from datetime import datetime
 from app.services.extract_features import extract_features
@@ -16,6 +17,7 @@ model = load_model()
 @router.post("/upload/")
 async def upload_audio(file: UploadFile = File(...)):
     try:
+        filename = file.filename
         contents = await file.read()
         file_path = os.path.join(UPLOAD_DIR, file.filename)
 
@@ -41,11 +43,10 @@ async def upload_audio(file: UploadFile = File(...)):
         print("Returning response...")
 
         return {
-            "message": "File uploaded, features extracted, prediction complete",
-            "filename": file.filename,
-            "features": features,
+            "filename": filename,
             "parkinson_detected": bool(prediction),
-            "confidence": round(confidence, 4)
+            "confidence": float(confidence),
+            "features": features
         }
 
     except Exception as e:
