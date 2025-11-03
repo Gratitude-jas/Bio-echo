@@ -306,3 +306,294 @@ a, button, input[type="file"] {
   .container, .features, .grid, .output-page .card {padding: 13px 4vw;}
   .hero-content {padding: 14px 2vw;}
 }
+
+body.output-page {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #fdfbfb, #ebedee);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+canvas {
+  margin-top: 1rem;
+  max-width: 100%;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #009ecf;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #009ecf;
+}
+
+/* History page layout */
+body.history-page {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #fdfbfb, #ebedee);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 95%;
+  max-width: 800px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background-color: #00c9ff;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Button styling */
+/* button {
+  padding: 0.4rem 0.8rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #009ecf;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #009ecf;
+} */
+
+body.trend-page {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #fdfbfb, #ebedee);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+select {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* button, .back-button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .back-button:hover {
+  background-color: #009ecf;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+button, .back-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .back-button:hover {
+  background-color: #009ecf;
+} */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button, .back-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .back-button:hover {
+  background-color: #009ecf;
+}
+
+.my-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* ✅ Safari support */
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /* ✅ Safari support */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button,
+.back-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #00c9ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.back-button:hover {
+  background-color: #009ecf;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+}

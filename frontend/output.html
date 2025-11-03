@@ -3,23 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <title>BioEcho | Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="output-page">
   <div class="card">
     <h1>🧠 Prediction Results</h1>
     <div id="results"></div>
-    <a href="index.html" class="back-button">🔁 Upload Another</a>
+
+    <h3>📊 Feature Radar</h3>
+    <canvas id="radarChart" width="300" height="300"></canvas>
+
+    <h3>🧠 SHAP Feature Impact</h3>
+    <canvas id="shapChart" width="400" height="300"></canvas>
+
+    <!-- <h3>🎙️ Voice Playback</h3>
+    <audio id="audioPlayer" controls></audio> -->
+
+    <div class="button-group">
+      <a href="index.html" class="back-button" title="Upload another voice sample">🔁 Upload Another</a>
+      <button id="downloadReport" title="Download prediction report" class="back-button">🧾 Download Report</button>
+      <a href="history.html" class="back-button" title="View previous results">📁 View History</a>
+    </div>
   </div>
-  <script>
-    const resultData = JSON.parse(localStorage.getItem("bioecho_result"));
-    document.getElementById("results").innerHTML = `
-      <strong>Filename:</strong> ${resultData.filename}<br>
-      <strong>Parkinson Detected:</strong> ${resultData.parkinson_detected ? "Yes" : "No"}<br>
-      <strong>Confidence:</strong> ${Math.round(resultData.confidence * 100)}%<br>
-      <strong>Features:</strong>
-      <ul>${Object.entries(resultData.features).map(([k, v]) => `<li>${k}: ${v.toFixed(4)}</li>`).join("")}</ul>
-    `;
-  </script>
+
+  <!-- ✅ Load jsPDF first, then your script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="output.js"></script>
 </body>
 </html>

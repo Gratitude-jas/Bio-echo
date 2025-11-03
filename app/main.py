@@ -19,7 +19,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+app.mount("/audio", StaticFiles(directory="frontend"), name="static")
 
 # ✅ Include routers
 app.include_router(upload.router)
@@ -46,3 +46,10 @@ def get_chart(name: str):
     if os.path.exists(file_path):
         return FileResponse(file_path, media_type="image/png")
     raise HTTPException(status_code=404, detail="Chart not found")
+
+@app.get("/audio/{filename}")
+def get_audio(filename: str):
+    filepath = os.path.join("audio", filename)
+    if not os.path.isfile(filepath):
+        raise HTTPException(status_code=404, detail="Audio file not found")
+    return FileResponse(filepath, media_type="audio/wav")
