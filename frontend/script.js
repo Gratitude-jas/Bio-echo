@@ -23,8 +23,17 @@ document.getElementById("uploadForm").addEventListener("submit", function (e) {
       return res.json();
     })
     .then(data => {
-      localStorage.setItem("bioecho_result", JSON.stringify(data));
-      window.location.href = "output.html";
+      // ✅ Save latest result for output.html
+  localStorage.setItem("bioecho_result", JSON.stringify(data));
+
+  // ✅ Append to history
+  const history = JSON.parse(localStorage.getItem("bioecho_history")) || [];
+  history.push(data);
+  localStorage.setItem("bioecho_history", JSON.stringify(history));
+
+  // ✅ Redirect to output page
+  window.location.href = "output.html";
+
     })
     .catch(err => {
       status.innerText = "❌ Upload failed. Check backend or CORS.";

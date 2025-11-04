@@ -53,3 +53,11 @@ def get_audio(filename: str):
     if not os.path.isfile(filepath):
         raise HTTPException(status_code=404, detail="Audio file not found")
     return FileResponse(filepath, media_type="audio/wav")
+
+
+@app.get("/history/")
+def get_history():
+    log_path = "data/predictions_log.csv"
+    if os.path.exists(log_path):
+        return FileResponse(log_path, media_type="text/csv")
+    raise HTTPException(status_code=404, detail="History log not found")

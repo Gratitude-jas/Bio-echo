@@ -8,7 +8,7 @@ def extract_features(audio_path, target_sr=16000):
         raise ValueError("Audio too short or unreadable.")
 
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-    mfcc_mean = np.mean(mfccs, axis=1)
+    mfcc_mean = np.mean(mfccs, axis=1) if mfccs.shape[1] > 0 else np.zeros(13)
 
     pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
     pitch_values = pitches[magnitudes > np.median(magnitudes)]
@@ -35,6 +35,16 @@ def extract_features(audio_path, target_sr=16000):
         "shimmer": float(shimmer),
         "hnr": float(hnr)
     }
+
+    # Build feature dict
+    features = {f"mfcc_{i+1}": float(mfcc_mean[i]) for i in range(13)}
+    features.update({
+        "pitch": float(pitch_mean),
+        "jitter": float(jitter),
+        "shimmer": float(shimmer),
+        "hnr": float(hnr)
+    })
+
     # Replace NaNs or infs with 0
     for k, v in features.items():
         if np.isnan(v) or np.isinf(v):

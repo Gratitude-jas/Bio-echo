@@ -34,8 +34,10 @@ async def upload_audio(file: UploadFile = File(...)):
 
         feature_values = list(features.values())
         print("📊 Feature values:", feature_values)
-
-        # Make prediction
+        expected_features = getattr(model, "feature_names_in_", None)
+        print("🧩 Model expects:", expected_features if expected_features is not None else "Unknown")
+        print("🧩 Provided keys:", list(features.keys()))
+        print("🧩 Feature vector:", feature_values)
         prediction = model.predict([feature_values])[0]
         print("🧠 Prediction:", prediction)
 
@@ -47,15 +49,32 @@ async def upload_audio(file: UploadFile = File(...)):
 
         timestamp = datetime.now().isoformat()
 
+        # print("🧪 Model classes:", model.classes_)
+        # print("📊 Probabilities:", model.predict_proba([feature_values])[0])
+        
+
         # SHAP explainability
         explainer = shap.TreeExplainer(model)
         shap_input = np.array([feature_values])
-        shap_values = explainer.shap_values(shap_input)[class_index]
+        shap_values_raw = explainer.shap_values(shap_input)
+
+# Handle binary classification
+        if isinstance(shap_values_raw, list) and len(shap_values_raw) == 2:
+            shap_values = shap_values_raw[class_index]
+        else:
+            shap_values = shap_values_raw  # single array for binary case
+        # shap_values = explainer.shap_values(shap_input)[class_index]
         # feature_importance = dict(zip(features.keys(), shap_values))
-        feature_importance = {
-            key: float(value) if isinstance(value, (np.float32, np.float64, float)) else float(value[0])
-            for key, value in zip(features.keys(), shap_values)
-        }
+        # Extract SHAP values for the first sample
+        shap_values_sample = shap_values[0]  # shape: [7]
+
+        feature_importance = {}
+        for key, val in zip(features.keys(), shap_values_sample):
+    # Flatten and safely convert each SHAP value
+            if isinstance(val, (np.ndarray, list)):
+                feature_importance[key] = float(np.ravel(val)[0])
+            else:
+                feature_importance[key] = float(val)
         print("📌 Feature importance:", feature_importance)
 
         # Log to CSV
@@ -74,7 +93,8 @@ async def upload_audio(file: UploadFile = File(...)):
             "parkinson_detected": bool(prediction == "Diseased"),
             "confidence": float(confidence),
             "features": features,
-            "feature_importance": feature_importance
+            "feature_importance": feature_importance,
+            "timestamp": timestamp
         }
 
     except Exception as e:

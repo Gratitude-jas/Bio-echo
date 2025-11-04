@@ -37,9 +37,29 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // SHAP bar chart
-  const shapData = resultData.feature_importance || {};
-  const shapLabels = Object.keys(shapData);
-  const shapValues = Object.values(shapData);
+  // const shapData = resultData.feature_importance || {};
+  // const shapLabels = Object.keys(shapData);
+  // const shapValues = Object.values(shapData);
+
+  // SHAP bar chart — sorted and horizontal
+  const shapData = Object.entries(resultData.feature_importance || {});
+
+// Sort by absolute impact
+  shapData.sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+
+// Prepare chart data
+  const shapLabels = shapData.map(([key]) => key);
+  const shapValues = shapData.map(([_, value]) => value);
+  const shapColors = shapValues.map(v =>
+  v === 0 ? "rgba(200, 200, 200, 0.4)" :
+  v > 0 ? "rgba(0, 201, 255, 0.6)" :
+          "rgba(255, 99, 132, 0.6)"
+);
+  const shapBorders = shapValues.map(v =>
+  v === 0 ? "#ccc" :
+  v > 0 ? "#00c9ff" :
+          "#ff6384"
+);
 
   console.log("SHAP feature_importance:", shapData);
   console.log("SHAP Labels:", shapLabels);
@@ -51,43 +71,42 @@ window.addEventListener("DOMContentLoaded", () => {
     console.error("❌ Canvas element with id 'shapChart' not found in HTML.");
   } else if (shapLabels.length > 0) {
     new Chart(shapCanvas, {
-      type: "bar",
-      data: {
-        labels: shapLabels,
-        datasets: [{
-          label: "SHAP Value",
-          data: shapValues,
-          backgroundColor: shapValues.map(v =>
-            v === 0 ? "rgba(200, 200, 200, 0.4)" :
-            v > 0 ? "rgba(0, 201, 255, 0.6)" :
-                    "rgba(255, 99, 132, 0.6)"
-          ),
-          borderColor: shapValues.map(v =>
-            v === 0 ? "#ccc" :
-            v > 0 ? "#00c9ff" :
-                    "#ff6384"
-          ),
-          borderWidth: 1
-        }]
+  type: "bar",
+  data: {
+    labels: shapLabels,
+    datasets: [{
+      label: "SHAP Value",
+      data: shapValues,
+      backgroundColor: shapColors,
+      borderColor: shapBorders,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    indexAxis: "y", // ✅ Horizontal bars
+    plugins: {
+      title: {
+        display: true,
+        text: "Feature Impact on Prediction"
+      }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "SHAP Value"
+        }
       },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: "Feature Impact on Prediction"
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: "SHAP Value"
-            }
-          }
+      y: {
+        title: {
+          display: true,
+          text: "Feature"
         }
       }
-    });
+    }
+  }
+});
   } else {
     console.warn("⚠️ SHAP data missing — chart skipped.");
   }
