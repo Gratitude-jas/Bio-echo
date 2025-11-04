@@ -4,6 +4,9 @@ import numpy as np
 def extract_features(audio_path, target_sr=16000):
     y, sr = librosa.load(audio_path, sr=target_sr)
 
+    if y is None or len(y)<1000:
+        raise ValueError("Audio too short or unreadable.")
+
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
     mfcc_mean = np.mean(mfccs, axis=1)
 
@@ -32,3 +35,9 @@ def extract_features(audio_path, target_sr=16000):
         "shimmer": float(shimmer),
         "hnr": float(hnr)
     }
+    # Replace NaNs or infs with 0
+    for k, v in features.items():
+        if np.isnan(v) or np.isinf(v):
+            features[k] = 0.0
+
+    return features

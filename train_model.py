@@ -35,3 +35,7 @@ with open("models/rf_model.pkl", "wb") as f:
     pickle.dump(model, f)
 
 print("✅ Model saved as models/rf_model.pkl")
+
+# Test the saved model
+model = pickle.load(open("models/rf_model.pkl", "rb"))
+print(model.predict([[0.1, 0.2, 0.3, 150, 0.01, 0.02, 20]]))
